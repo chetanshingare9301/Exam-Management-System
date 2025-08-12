@@ -1,0 +1,279 @@
+/* public/studentadmin.css - Replicates admin-like layout for student dashboard and related pages */
+
+/* Base layout for student pages to mimic admin structure */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    display: flex; /* Essential for sidebar + main content layout */
+    min-height: 100vh; /* Ensures the body always takes full viewport height */
+    overflow-x: hidden; /* Prevent horizontal scroll from layout shifts */
+}
+
+.student-sidebar {
+    width: 240px;
+    background-color:#1e293b; /* Same dark background as admin */
+    color: white;
+    position: fixed; /* Keep sidebar fixed on screen */
+    height: 100vh; /* Full viewport height */
+    padding: 20px 0;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.2); /* Subtle shadow on the right */
+    display: flex; /* Use flexbox to arrange items vertically */
+    flex-direction: column; /* Stack navigation links */
+    overflow-y: auto; /* Enable vertical scrolling if content exceeds height */
+    z-index: 1000; /* Ensure sidebar is on top of other content */
+}
+
+.student-sidebar h2 {
+    text-align: center;
+    margin-bottom: 1.5rem; /* Slightly more space below title */
+    font-size: 1.6rem; /* Slightly larger title */
+    color: white;
+    padding: 0 15px; /* Add some horizontal padding for text */
+}
+
+.student-sidebar a {
+    display: block;
+    color: #cbd5e1; /* Lighter text for links */
+    text-decoration: none;
+    padding: 12px 24px;
+    transition: background-color 0.2s ease-in, color 0.2s ease-in; /* More specific transition */
+    white-space: nowrap; /* Prevent text wrapping in links */
+}
+
+.student-sidebar a:hover {
+    background-color: #334155; /* Hover background matching admin */
+    color: white;
+}
+
+/* Active state for sidebar links */
+.student-sidebar a.active {
+    background-color: #2563eb; /* Primary blue for active link */
+    color: white;
+    font-weight: 600; /* Make active link bolder */
+    border-left: 4px solid #f9fafb; /* Visual indicator on the left */
+    padding-left: 20px; /* Adjust padding due to border */
+}
+
+.student-main-content {
+    margin-left: 240px; /* Offset for the fixed sidebar */
+    flex-grow: 1; /* Allows main content to take up remaining space */
+    padding: 20px;
+    background-color: #f4f6f9; /* Ensure consistent background */
+}
+
+.student-header {
+    background: white;
+    padding: 16px 24px;
+    border-bottom: 1px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px; /* Slightly rounded corners for header */
+    margin-bottom: 20px; /* Space below the header */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Subtle shadow for header */
+}
+
+.student-header h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    color: #1e293b; /* Consistent heading color */
+}
+
+.student-card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 20px;
+    margin-top: 24px;
+}
+
+.student-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Slightly more prominent shadow */
+    transition: transform 0.2s ease-in-out; /* Add transition for hover effect */
+}
+
+.student-card:hover {
+    transform: translateY(-5px); /* Lift card on hover */
+}
+
+.student-card h2 {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.student-card .value {
+    font-size: 28px;
+    color: #2563eb; /* Primary color */
+    font-weight: 700; /* Make value bolder */
+}
+
+.student-table-wrapper {
+    background: white;
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08); /* Consistent shadow with cards */
+    overflow-x: auto; /* Make table horizontally scrollable on small screens */
+}
+
+.student-table-wrapper h2 {
+    margin-bottom: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e293b; /* Consistent heading color */
+}
+
+.student-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    min-width: 600px; /* Ensure table is at least this wide for readability */
+}
+
+.student-table thead {
+    background-color: #f1f5f9;
+}
+
+.student-table th, .student-table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.student-table tbody tr:last-child td {
+    border-bottom: none; /* No border for the last row */
+}
+
+.student-table tbody tr:hover {
+    background-color: #f8fafc; /* Subtle row highlight on hover */
+}
+
+/* Reusing status classes for consistency */
+.status-active {
+    color: #28a745; /* Green */
+    font-weight: 600;
+    background-color: #e6ffed; /* Light green background */
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.status-pending {
+    color: #ffc107; /* Orange */
+    font-weight: 600;
+    background-color: #fff9e6; /* Light yellow background */
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.status-completed { /* Added a completed status */
+    color: #007bff; /* Blue */
+    font-weight: 600;
+    background-color: #e6f2ff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+/* Specific styles for profile details within a card */
+.profile-detail {
+    margin-bottom: 15px;
+    display: flex; /* Use flex for key-value alignment */
+    align-items: baseline;
+}
+.profile-detail strong {
+    display: inline-block;
+    width: 120px; /* Increased width for labels */
+    color: #475569;
+    font-weight: 600; /* Make labels bolder */
+    flex-shrink: 0; /* Prevent label from shrinking */
+}
+.profile-detail span {
+    flex-grow: 1; /* Allow value to take remaining space */
+    color: #333;
+}
+
+/* --- Responsive Design / Media Queries --- */
+@media (max-width: 768px) {
+    body {
+        flex-direction: column; /* Stack sidebar and main content vertically */
+    }
+
+    .student-sidebar {
+        position: relative; /* No longer fixed on small screens */
+        width: 100%; /* Sidebar takes full width */
+        height: auto; /* Height adjusts to content */
+        padding: 15px 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2); /* Shadow at bottom when collapsed */
+        flex-direction: row; /* Make links horizontal on top bar */
+        flex-wrap: wrap; /* Allow links to wrap if too many */
+        justify-content: center; /* Center items in the horizontal nav */
+    }
+
+    .student-sidebar h2 {
+        display: none; /* Hide the welcome title on small screens */
+    }
+
+    .student-sidebar a {
+        padding: 10px 15px; /* Smaller padding for horizontal links */
+        text-align: center; /* Center text in horizontal links */
+        border-left: none; /* Remove border from active link for horizontal layout */
+    }
+
+    .student-sidebar a.active {
+        border-left: none; /* Ensure no left border */
+        border-bottom: 4px solid #f9fafb; /* Use bottom border for active state */
+        padding-bottom: 6px; /* Adjust padding for bottom border */
+    }
+
+    .student-main-content {
+        margin-left: 0; /* Remove left margin */
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+
+    .student-header {
+        flex-direction: column; /* Stack header elements */
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    .student-header h1 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .student-card-grid {
+        grid-template-columns: 1fr; /* Stack cards vertically on small screens */
+    }
+
+    .student-table {
+        min-width: 100%; /* Allow table to shrink but still use overflow-x */
+    }
+}
+
+@media (max-width: 480px) {
+    .student-sidebar a {
+        font-size: 0.9rem;
+        padding: 8px 10px;
+    }
+    .student-header h1 {
+        font-size: 18px;
+    }
+    .student-card {
+        padding: 15px;
+    }
+    .student-table th, .student-table td {
+        padding: 8px;
+    }
+    .profile-detail strong {
+        width: 90px; /* Smaller label width for very small screens */
+    }
+}

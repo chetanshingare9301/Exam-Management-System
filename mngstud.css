@@ -1,0 +1,224 @@
+/* public/mngstud.css - Horizontal Top Navigation Bar */
+
+/* --- Base Body Styles --- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9; /* Light background for the main content area */
+    color: #333;
+    min-height: 100vh;
+    /* Ensure overflow-x: hidden; is NOT here on body */
+}
+
+/* --- Horizontal Navbar Styles --- */
+.navbar {
+    background-color: #2c3e50;
+    color: white;
+    /* --- MODIFIED: Increased overall navbar horizontal padding for better aesthetics --- */
+    padding: 0 20px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    box-sizing: border-box;
+    flex-wrap: nowrap; /* CRITICAL: PREVENTS ITEMS FROM WRAPPING TO THE NEXT ROW */
+    min-width: fit-content;
+    /* If you still get horizontal scrollbars on desired desktop screen sizes after these changes,
+       it means the combined content width is simply too wide. Options:
+       1. Accept the horizontal scrollbar.
+       2. Reduce content (e.g., fewer menu items, shorter text).
+       3. Implement a hamburger menu/collapsed navigation at an earlier (wider) screen breakpoint.
+       4. Uncomment the `font-size` adjustments below.
+    */
+}
+
+/* Styling for each top-level navigation link */
+.navbar > a { /* Target direct children 'a' tags of navbar */
+    color: #ecf0f1;
+    text-decoration: none;
+    /* --- MODIFIED: Increased horizontal padding for a better look --- */
+    padding: 18px 15px; /* Vertical 18px, Horizontal 15px */
+    display: block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    white-space: nowrap; /* Prevent links from wrapping */
+    font-weight: 500;
+    /* Optional: Uncomment if content is still too wide */
+    /* font-size: 0.95em; */ /* Slightly reduce font size for all main links */
+}
+
+.navbar > a:hover {
+    background-color: #34495e;
+    color: white;
+}
+
+/* Active link styling (you'll add 'active' class via server-side logic/JS) */
+.navbar > a.active {
+    background-color: #3498db;
+    color: white;
+    font-weight: 700;
+}
+
+/* --- Dropdown Specific Styles --- */
+.admin-dropdown {
+    position: relative;
+    display: inline-block;
+    margin-right: 0px;
+    white-space: nowrap;
+}
+
+/* Dropdown button (the clickable part, e.g., "Student Management") */
+.admin-dropbtn {
+    background-color: transparent;
+    color: #ecf0f1;
+    /* --- MODIFIED: Increased horizontal padding and gap for a better look --- */
+    padding: 18px 15px; /* Vertical 18px, Horizontal 15px */
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Increased gap for better spacing with icon */
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 500;
+    border: none;
+    white-space: nowrap;
+    /* Optional: Uncomment if content is still too wide */
+    /* font-size: 0.95em; */ /* Slightly reduce font size for dropdown buttons */
+}
+
+.admin-dropbtn:hover,
+.admin-dropdown.open .admin-dropbtn {
+    background-color: #34495e;
+    color: white;
+}
+
+/* Dropdown Content (the actual sub-links) */
+.admin-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #34495e;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
+    z-index: 1001;
+    border-radius: 4px;
+    overflow: hidden;
+    left: 0;
+    top: 100%;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* When the dropdown is 'open' (via JS) */
+.admin-dropdown.open .admin-dropdown-content {
+    display: block;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.admin-dropdown-content a {
+    color: #ecf0f1;
+    padding: 12px 20px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-weight: 400;
+    white-space: nowrap;
+}
+
+.admin-dropdown-content a:hover {
+    background-color: #47607a;
+    color: white;
+}
+
+/* --- Main Content Area (e.g., dashboard content, forms) --- */
+.main-content {
+    padding: 30px;
+    background-color: #f4f6f9;
+    min-height: calc(100vh - 60px);
+    box-sizing: border-box;
+}
+
+.main-content h1 {
+    color: #2c3e50;
+    margin-bottom: 25px;
+    font-size: 2em;
+}
+
+/* --- Logout Link Specific Styles --- */
+.logout-link {
+   
+    color: white !important;
+    font-weight: 600;
+    margin-left: auto; /* Pushes the logout link to the far right */
+    /* --- MODIFIED: Increased horizontal padding for a better look --- */
+    padding: 18px 15px; /* Consistent with other main links */
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease;
+    white-space: nowrap;
+    /* Optional: Uncomment if content is still too wide */
+    /* font-size: 0.95em; */ /* Slightly reduce font size for logout link */
+}
+
+.logout-link:hover {
+    
+    color: white;
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 992px) { /* Adjustments for medium screens (tablets) */
+    .navbar {
+        /* --- MODIFIED: Consistent overall navbar padding for medium screens --- */
+        padding: 0 15px;
+    }
+    .navbar > a, .admin-dropbtn, .logout-link {
+        /* --- MODIFIED: Increased horizontal padding for medium screens --- */
+        padding: 15px 12px; /* Vertical 15px, Horizontal 12px */
+    }
+}
+
+@media (max-width: 768px) { /* Adjustments for small screens (mobiles) */
+    .navbar {
+        flex-direction: column; /* Stack nav items vertically */
+        align-items: stretch; /* Stretch items to fill width */
+        padding: 10px 0;
+        flex-wrap: nowrap; /* Still nowrap for vertical stacking */
+    }
+    .navbar > a, .admin-dropbtn, .logout-link {
+        width: 100%;
+        text-align: left;
+        padding: 10px 20px; /* Larger padding for stacked mobile view */
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        margin-left: 0; /* Remove auto-margin on mobile to allow stacking */
+    }
+    .admin-dropdown {
+        width: 100%;
+        margin-right: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .admin-dropbtn {
+        justify-content: space-between;
+    }
+    .admin-dropdown-content {
+        position: static;
+        min-width: unset;
+        width: 100%;
+        box-shadow: none;
+        border-radius: 0;
+        background-color: #1a232f;
+    }
+    .admin-dropdown-content a {
+        padding-left: 40px;
+        text-align: left;
+    }
+
+    .main-content {
+        padding: 20px 15px;
+    }
+}
